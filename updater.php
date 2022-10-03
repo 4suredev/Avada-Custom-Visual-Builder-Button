@@ -46,10 +46,10 @@ class Custom_visual_builder_button_updater {
         }
     }
     public function initialize() {
-		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'modify_transient' ), 10, 1 );
+		/* Adding a filter to the transient. */
+        add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'modify_transient' ), 10, 1 );
 		add_filter( 'plugins_api', array( $this, 'plugin_popup' ), 10, 3);
 		add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
-		
 		// Add Authorization Token to download_package
 		add_filter( 'upgrader_pre_download',
 			function() {
@@ -59,7 +59,6 @@ class Custom_visual_builder_button_updater {
 		);
 	}
     public function modify_transient( $transient ) {
-
         if( property_exists( $transient, 'checked') ) { // Check if transient has a checked property
           if( $checked = $transient->checked ) { // Did WordPress check for updates?
             $this->get_repository_info(); // Get the repo info
@@ -80,7 +79,6 @@ class Custom_visual_builder_button_updater {
         return $transient; // Return filtered transient
     }
     public function plugin_popup( $result, $action, $args ) {
-
 		if( ! empty( $args->slug ) ) { // If there is a slug
 			
 			if( $args->slug == current( explode( '/' , $this->basename ) ) ) { // And it's our slug
