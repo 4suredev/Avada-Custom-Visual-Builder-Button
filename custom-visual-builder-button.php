@@ -3,7 +3,7 @@
  * Plugin Name: Avada Button Shortcode
  * Plugin URI: https://4sure.com.au
  * Description: Adds Avada button shortcodes to the classic editor
- * Version: 2.0.0
+ * Version: 1.0.0
  * Author: 4sure
  * Requires PHP: 7.2
  * Requires at least: 5.8
