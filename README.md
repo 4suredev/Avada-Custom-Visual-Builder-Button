@@ -1,6 +1,6 @@
 # Avada-Custom-Visual-Builder-Button
-
-<p>Adds Avada button shortcodes to the classic editor.</p>
+<img src="https://i.imgur.com/qhV654f.png">
+<p>Adds a custom Avada button shortcode to the classic editor with simple parameters.</p>
 
 <table class="table-borderless" style="text-align: left;">
     <tbody>
