@@ -10,6 +10,15 @@
  * Author URI: https://4sure.com.au
  */
 define('VBB_PLUGIN_PATH', home_url().'/wp-content/plugins/custom-visual-builder-button/');
+// Include our updater file
+include_once( plugin_dir_path( __FILE__ ) . 'updater.php');
+$updater = new Custom_visual_builder_button_updater( __FILE__ ); // instantiate our class
+$updater->set_username( '4surecarlo' ); // set username
+$updater->set_repository( 'Avada-Custom-Visual-Builder-Button' ); // set repo
+$updater->initialize(); // initialize the updater
+if( ! class_exists( 'Custom_visual_builder_button_updater' ) ){
+	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
+}
 add_action( 'wp_enqueue_scripts', 'vbb_enqueue_styles' );
 function vbb_enqueue_styles(){
     wp_enqueue_style( 'vbb-widget-styles', VBB_PLUGIN_PATH.'css/frontend-button-widget-styles.css' );
