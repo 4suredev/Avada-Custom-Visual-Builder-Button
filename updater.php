@@ -1,5 +1,4 @@
 <?php
-//  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
 class Custom_visual_builder_button_updater {
     protected $file;
     protected $plugin;
