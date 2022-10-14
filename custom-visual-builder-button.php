@@ -3,13 +3,13 @@
  * Plugin Name: Avada Button Shortcode
  * Plugin URI: https://4sure.com.au
  * Description: Adds Avada button shortcodes to the classic editor
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: 4sure
  * Requires PHP: 7.2
  * Requires at least: 5.8
  * Author URI: https://4sure.com.au
  */
-define('VBB_PLUGIN_PATH', home_url().'/wp-content/plugins/custom-visual-builder-button/');
+define('VBB_PLUGIN_PATH', plugin_dir_url( __FILE__ ));
 include_once( plugin_dir_path( __FILE__ ) . 'updater.php');
 $updater = new Custom_visual_builder_button_updater( __FILE__ ); // instantiate our class
 $updater->set_username( '4suredev' ); // set username
