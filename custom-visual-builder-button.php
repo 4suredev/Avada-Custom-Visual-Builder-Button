@@ -3,7 +3,7 @@
  * Plugin Name: Avada Button Shortcode
  * Plugin URI: https://4sure.com.au
  * Description: Adds Avada button shortcodes to the classic editor
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: 4sure
  * Requires PHP: 7.2
  * Requires at least: 5.8
@@ -22,8 +22,8 @@ add_action( 'wp_enqueue_scripts', 'vbb_enqueue_styles' );
 function vbb_enqueue_styles(){
     wp_enqueue_style( 'vbb-widget-styles', VBB_PLUGIN_PATH.'css/frontend-button-widget-styles.css' );
 }
-add_shortcode('button', 'custom_visual_builder_button');
-function custom_visual_builder_button($atts = array()){
+add_shortcode('button', 'vbb_custom_visual_builder_button');
+function vbb_custom_visual_builder_button($atts = array()){
     $args = shortcode_atts(
         array(
         'target'    => '',
@@ -52,7 +52,7 @@ function custom_visual_builder_button($atts = array()){
     return $html;
 }
 //add media button to visual builder
-function add_shortcodes_media_button() {
+function vbb_add_shortcodes_media_button() {
     $the_page = get_current_screen();
     $current_page = $the_page->post_type;
     $allowed = array(
@@ -76,19 +76,19 @@ function add_shortcodes_media_button() {
         </script>';
     }
 }
-add_action( 'media_buttons', 'add_shortcodes_media_button');
+add_action( 'media_buttons', 'vbb_add_shortcodes_media_button');
 //Button shortcode admin bar widget
-add_action('admin_enqueue_scripts', 'my_enqueue');
-function my_enqueue($hook) {
+add_action('admin_enqueue_scripts', 'vbb_admin_scripts_enqueue');
+function vbb_admin_scripts_enqueue($hook) {
     // Only add to the edit post/page admin page.
     if ('post.php' == $hook || 'post-new.php' == $hook || 'toplevel_page_access-manager' == $hook) {
         wp_enqueue_script('admin_custom_script', VBB_PLUGIN_PATH.'js/custom-admin-scripts.js');
         wp_enqueue_script('jquery-ui', 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js');
     }else{return;}
 }
-add_action( 'edit_form_after_editor', 'render_button_shortcode_dialog' );
-add_action( 'toplevel_page_access-manager', 'render_button_shortcode_dialog', 20 );
-function render_button_shortcode_dialog( $post ){
+add_action( 'edit_form_after_editor', 'vbb_render_button_shortcode_dialog' );
+add_action( 'toplevel_page_access-manager', 'vbb_render_button_shortcode_dialog', 20 );
+function vbb_render_button_shortcode_dialog( $post ){
 	echo '
     <style>
         #button-shortcode-dialog{display: none;}
@@ -194,8 +194,8 @@ function render_button_shortcode_dialog( $post ){
     <div id="page-mask"></div>
     ';
 }
-add_action('admin_bar_menu', 'add_toolbar_items', 100);
-function add_toolbar_items($admin_bar){
+add_action('admin_bar_menu', 'vbb_add_toolbar_items', 100);
+function vbb_add_toolbar_items($admin_bar){
     $admin_bar->add_menu( array(
         'id'    => 'generate-button-shortcode',
         'title' => 'Generate Button',
@@ -205,8 +205,8 @@ function add_toolbar_items($admin_bar){
         ),
     ));
 }
-add_action( 'admin_head', 'hide_button_widget' );
-function hide_button_widget() {
+add_action( 'admin_head', 'vbb_hide_button_widget' );
+function vbb_hide_button_widget() {
     echo '<style> 
     #wp-admin-bar-generate-button-shortcode{display: none;}
     body.post-php #wp-admin-bar-generate-button-shortcode,
