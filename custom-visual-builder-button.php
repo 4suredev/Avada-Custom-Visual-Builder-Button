@@ -3,7 +3,7 @@
  * Plugin Name: Avada Button Shortcode
  * Plugin URI: https://4sure.com.au
  * Description: Adds Avada button shortcodes to the classic editor
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: 4sure
  * Requires PHP: 7.2
  * Requires at least: 5.8
@@ -64,7 +64,8 @@ function vbb_add_shortcodes_media_button() {
     if (in_array($current_page, $allowed, false) || $the_page->base == 'toplevel_page_access-manager' || $the_page->base == 'post'){
         printf( '<a href="%s" class="button generate-button-shortcode">' . '<span class="wp-media-buttons-icon dashicons dashicons-shortcode"></span> %s' . '</a>', '#', __( 'Generate Button', 'textdomain' ) );
     }
-    if(get_current_screen()->base == 'toplevel_page_access-manager'){
+    $current_screen = get_current_screen()->base;
+    if ($current_screen == 'toplevel_page_access-manager' || $current_screen == 'toplevel_page_acc-default-settings'){
         echo '<script type="text/javascript">
         jQuery(document).ready(function($){
             $(".generate-button-shortcode").click(function(e){
@@ -81,7 +82,7 @@ add_action( 'media_buttons', 'vbb_add_shortcodes_media_button');
 add_action('admin_enqueue_scripts', 'vbb_admin_scripts_enqueue');
 function vbb_admin_scripts_enqueue($hook) {
     // Only add to the edit post/page admin page.
-    if ('post.php' == $hook || 'post-new.php' == $hook || 'toplevel_page_access-manager' == $hook) {
+    if ('post.php' == $hook || 'post-new.php' == $hook || 'toplevel_page_access-manager' == $hook || 'toplevel_page_acc-default-settings' == $hook) {
         wp_enqueue_script('admin_custom_script', VBB_PLUGIN_PATH.'js/custom-admin-scripts.js');
         wp_enqueue_script('jquery-ui', 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js');
     }else{return;}
