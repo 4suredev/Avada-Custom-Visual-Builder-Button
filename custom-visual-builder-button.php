@@ -213,6 +213,7 @@ function vbb_hide_button_widget() {
     #wp-admin-bar-generate-button-shortcode{display: none;}
     body.post-php #wp-admin-bar-generate-button-shortcode,
     body.post-new-php #wp-admin-bar-generate-button-shortcode,
-    body.toplevel_page_access-manager #wp-admin-bar-generate-button-shortcode{display: list-item;}
+    body.toplevel_page_access-manager #wp-admin-bar-generate-button-shortcode,
+    body.toplevel_page_acc-default-settings #wp-admin-bar-generate-button-shortcode{display: list-item;}
     </style>';
 }
