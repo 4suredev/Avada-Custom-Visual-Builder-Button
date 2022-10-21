@@ -61,7 +61,7 @@ function vbb_add_shortcodes_media_button() {
         'product',
         'tribe_events'
     );
-    if (in_array($current_page, $allowed, false) || $the_page->base == 'toplevel_page_access-manager' || $the_page->base == 'post'){
+    if (in_array($current_page, $allowed, false) || $the_page->base == 'toplevel_page_access-manager' || $the_page->base == 'post' || $the_page->base == 'toplevel_page_acc-default-settings'){
         printf( '<a href="%s" class="button generate-button-shortcode">' . '<span class="wp-media-buttons-icon dashicons dashicons-shortcode"></span> %s' . '</a>', '#', __( 'Generate Button', 'textdomain' ) );
     }
     $current_screen = get_current_screen()->base;
@@ -83,12 +83,13 @@ add_action('admin_enqueue_scripts', 'vbb_admin_scripts_enqueue');
 function vbb_admin_scripts_enqueue($hook) {
     // Only add to the edit post/page admin page.
     if ('post.php' == $hook || 'post-new.php' == $hook || 'toplevel_page_access-manager' == $hook || 'toplevel_page_acc-default-settings' == $hook) {
-        wp_enqueue_script('admin_custom_script', VBB_PLUGIN_PATH.'js/custom-admin-scripts.js');
+        wp_enqueue_script('admin_custom_script', VBB_PLUGIN_PATH.'js/custom-admin-scripts.js', array('jquery-ui-dialog'));
         wp_enqueue_script('jquery-ui', 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js');
     }else{return;}
 }
 add_action( 'edit_form_after_editor', 'vbb_render_button_shortcode_dialog' );
 add_action( 'toplevel_page_access-manager', 'vbb_render_button_shortcode_dialog', 20 );
+add_action( 'toplevel_page_acc-default-settings', 'vbb_render_button_shortcode_dialog', 20 );
 function vbb_render_button_shortcode_dialog( $post ){
 	echo '
     <style>

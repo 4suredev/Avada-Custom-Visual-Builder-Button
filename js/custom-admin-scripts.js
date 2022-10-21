@@ -14,13 +14,22 @@ jQuery(document).ready(function($){
         },
         minWidth: 480
     });
-    acf.addAction('load', function(){
+    if(typeof acf != 'undefined'){
+        acf.addAction('load', function(){
+            $(document).on("click", ".generate-button-shortcode", function(e){
+                e.preventDefault();
+                $("#button-shortcode-dialog").dialog("open"); 
+                $("#page-mask").css({"opacity":1, "pointer-events": "auto"});
+            });
+        });
+    }else{
         $(document).on("click", ".generate-button-shortcode", function(e){
             e.preventDefault();
             $("#button-shortcode-dialog").dialog("open"); 
             $("#page-mask").css({"opacity":1, "pointer-events": "auto"});
         });
-    });
+    }
+   
     $('.generate-button-shortcode').click(function(e){
         e.preventDefault();
         $("#button-shortcode-dialog").dialog("open"); 
